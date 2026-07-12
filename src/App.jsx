@@ -5,8 +5,7 @@ import { getFirestore, collection, onSnapshot, addDoc, serverTimestamp, deleteDo
 import { getAuth, signInAnonymously, onAuthStateChanged } from 'firebase/auth';
 
 // --- CONFIGURATION ---
-// IMPORTANT: Replace the empty object below with your actual Firebase config
-// from the Firebase Console (Project Settings > General > Your apps)
+// IMPORTANT: Replace the placeholders below with your actual Firebase config
 const firebaseConfig = {
   apiKey: "YOUR_API_KEY",
   authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
@@ -20,6 +19,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
 
+// --- COMPONENT: AUTH SCREEN ---
 const AuthScreen = ({ authStep, householdId, setHouseholdId, pin, setPin, setAuthStep, onUnlock }) => (
   <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
     <div className="bg-white p-8 rounded-3xl shadow-xl w-full max-w-sm border border-gray-200">
@@ -45,6 +45,7 @@ const AuthScreen = ({ authStep, householdId, setHouseholdId, pin, setPin, setAut
   </div>
 );
 
+// --- COMPONENT: DASHBOARD ---
 const Dashboard = ({ entries, onAdd, onDelete, onLogout, total }) => (
   <div className="max-w-md mx-auto bg-white shadow-xl rounded-3xl p-6">
     <div className="text-center mb-6">
@@ -68,6 +69,7 @@ const Dashboard = ({ entries, onAdd, onDelete, onLogout, total }) => (
   </div>
 );
 
+// --- MAIN APP (ORCHESTRATOR) ---
 export default function App() {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
